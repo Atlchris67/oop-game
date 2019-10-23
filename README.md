@@ -1,5 +1,5 @@
 # OOP Game
-Object oriented browser-based, word guessing game developed to practice theprinciples of object-oriented Programming.
+Object oriented browser-based, word guessing game developed to practice the principles of object-oriented Programming.
 
 ## Rules of the Game:
 * The player’s goal is to guess all the letters in a hidden, random phrase. At the beginning, the player only sees the number of letters and words in the phrase, represented by blank boxes on the screen.
