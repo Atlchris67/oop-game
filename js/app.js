@@ -5,6 +5,8 @@
 const game = new Game();
 $('.pyro').hide();
 
+
+//start the game
 $('#btn__reset').click(function (event) {
     game.startGame();
     $('#overlay').hide();

@@ -38,12 +38,13 @@ class Game {
     };
 
     /**
-* Checks for winning move
-* @ return {boolean} True if game has been won, false if game wasn't
-won
-*/
+    * Checks for winning move
+    * @ return {boolean} True if game has been won, false if game wasn't
+    won
+    */
     checkForWin() {
-        if  ($('.hide').length === 0){
+        //if none of the phrase letters still hidden - yippee they won
+        if ($('.hide').length === 0) {
             this.gameOver(true);
         };
     };
@@ -53,9 +54,11 @@ won
      * @ param {boolean} gameWon - Whether or not the user won the game
      */
     gameOver(winner) {
-        $('#overlay').show().css("background-color", winner?"lime":"tomato");
-        $('#game-over-message').text(winner?"Great Job!":"Sorry, better luck next time!");
-        if (winner){
+        //used ternary statements to change bacnkground color and game over message 
+        $('#overlay').show().css("background-color", winner ? "lime" : "tomato");
+        $('#game-over-message').text(winner ? "Great Job!" : "Sorry, better luck next time!");
+        //if they won show the fireworks
+        if (winner) {
             $('.pyro').show();
         }
         this.reset = true;
@@ -69,13 +72,15 @@ won
         const $hearts = $('img[src="images/liveHeart.png"]');
         //I did it my way......(then chickened out)
         //let heartCount = $hearts.length;
-        this.missed++ ;
+
+        this.missed++;
         //if (heartCount > 1) {
+        //this is hard coded but should not be...:(
         if (this.missed < 5) {
-           
+
             $hearts.first().attr("src", "images/lostHeart.png").attr("alt", "Lost Heart Icon");
         } else {
-            this.gameOver(false);            
+            this.gameOver(false);
         }
     };
 
@@ -83,16 +88,20 @@ won
      * Begins game by selecting a random phrase and displaying it to user
      */
     startGame() {
-        if (this.reset){
+        if (this.reset) {
             this.resetGame();
         }
         const randomPhrase = game.getRandomPhrase();
         this.activePhrase = new Phrase(randomPhrase.phrase);
         this.activePhrase.addPhraseToDisplay();
-        
+
     };
 
-    resetGame(){
+
+    /**
+     * Resets game by clearing the keyboard and game board of classes, reset the heart images, stops pyro show for winners and restores click event to all keys used in the last game.
+     */
+    resetGame() {
         $(".key").removeClass('wrong chosen').off();
         $('img[src="images/lostHeart.png"]').attr("src", "images/liveHeart.png").attr("alt", "Heart Icon");
         $('.key').click(function (e) {
@@ -102,8 +111,12 @@ won
         this.activePhrase.removePhrase();
         this.missed = 0;
         $('.pyro').hide();
-    }
 
+    }
+    
+    /** 
+     * Handles events raised forn app.js for letters being played
+     */
     handleInteraction(letter) {
 
         const count = this.activePhrase.checkLetter(letter);
@@ -111,10 +124,10 @@ won
             this.activePhrase.showMatchedLetter(letter);
             this.checkForWin();
         } else {
-            $(".key:contains('"+ letter + "')").addClass('wrong').off();;
+            $(".key:contains('" + letter + "')").addClass('wrong').off();;
             this.removeLife();
         }
 
-        
+
     };
 }

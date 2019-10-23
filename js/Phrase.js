@@ -19,6 +19,10 @@ class Phrase {
         $('#phrase ul').empty();
     };
 
+    /**
+     * Adds lettes to the board
+     * @ param {*} letter 
+     */
     createSpace(letter) {
         const $space = $('<li></li>');
         const $destination = $('#phrase ul');
@@ -46,7 +50,9 @@ class Phrase {
      * @ param (string) letter - Letter to display
      */
     showMatchedLetter(letter) {
+        //show the the letter on the board
         $(".letter:contains('" + letter + "')").removeClass('hide').addClass('show');
+        //update the keyboard
         $(".key:contains('" + letter + "')").addClass('chosen').off();;
     }
 
